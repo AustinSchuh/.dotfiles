@@ -10,10 +10,42 @@
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
-" Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
+" To install vundle, run
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" Add maktaba and codefmt to the runtimepath.
+" (The latter must be installed before it can be used.)
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-codefmt'
+" Also add Glaive, which is used to configure codefmt's maktaba flags. See
+" `:help :Glaive` for usage.
+Plugin 'google/vim-glaive'
+
+call vundle#end()
+filetype plugin indent on    " required
+
+" the glaive#Install() should go after the "call vundle#end()"
+call glaive#Install()
+" Optional: Enable codefmt's default mappings on the <Leader>= prefix.
+"Glaive codefmt google_java_executable="java -jar /path/to/google-java-format-VERSION-all-deps.jar"
+
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
@@ -68,11 +100,28 @@ set modeline
 set hlsearch
 
 au FileType python setl sw=4 sts=4 et
+
 au BufRead,BufNewFile BUILD setfiletype python
 
-augroup filetype
-  au! BufRead,BufNewFile *.proto setfiletype proto
-augroup end
+"augroup filetype
+  "au! BufRead,BufNewFile *.proto setfiletype proto
+"augroup end
 
-map <C-k> :pyf /usr/share/vim/addons/syntax/clang-format-3.8.py<CR>
-imap <C-k> :pyf /usr/share/vim/addons/syntax/clang-format-3.8.py<CR>i
+" TODO(austin): Handle BUILD files better.  They take :FormatCode
+map <C-k> :FormatLines<CR>
+imap <C-k> :FormatLines<CR>i
+
+color default
+set nu
+
+if has('autocmd')
+  augroup autoformat_settings
+    autocmd!
+
+    autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
+    autocmd FileType javascript AutoFormatBuffer prettier
+    autocmd FileType go AutoFormatBuffer gofmt
+    autocmd FileType java AutoFormatBuffer google-java-format
+    autocmd FileType python AutoFormatBuffer yapf
+  augroup END
+endif
