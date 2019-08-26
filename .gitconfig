@@ -1,0 +1,11 @@
+[user]
+	name = Austin Schuh
+	email = austin.linux@gmail.com
+[merge]
+	tool = vimdiff
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[core]
+      excludesfile = ~/.gitignore
