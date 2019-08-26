@@ -1,7 +1,3 @@
-xpdf*viKeys: True
-xpdf*toolTipEnable: False
-xpdf*initialZoom: page
-xpdf*continuousView: True
 ! xterm color scheme — Make all 16 beautiful.                                
 !
 ! Suited for black background, but includes disabled alternative light scheme.
