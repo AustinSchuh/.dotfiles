@@ -15,6 +15,7 @@ shopt -s histappend
 export HISTSIZE=1000000
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="history | grep*:c:l:cl"
+export EDITOR="vim"
 export HOSTNAME
 xhost +local:root 2> /dev/null > /dev/null
 
