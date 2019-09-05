@@ -10,11 +10,19 @@
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
-" To install vundle, run
-" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" Check to see if vundle is installed.  If not, install it.
+let vundle_already_installed=1
+let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
+if !filereadable(vundle_readme)
+  echo "Installing Vundle.."
+  echo ""
+  silent !mkdir -p ~/.vim/bundle
+  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  let vundle_already_installed=0
+endif
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -31,6 +39,14 @@ Plugin 'google/vim-codefmt'
 Plugin 'google/vim-glaive'
 
 call vundle#end()
+
+" If vundle wasn't installed, install it now that all the plugins are listed.
+if vundle_already_installed == 0
+  echo "Installing Bundles, please ignore key map error messages"
+  echo ""
+  :PluginInstall
+endif
+
 filetype plugin indent on    " required
 
 " the glaive#Install() should go after the "call vundle#end()"
