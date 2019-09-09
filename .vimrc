@@ -52,7 +52,7 @@ filetype plugin indent on    " required
 " the glaive#Install() should go after the "call vundle#end()"
 call glaive#Install()
 " Optional: Enable codefmt's default mappings on the <Leader>= prefix.
-"Glaive codefmt google_java_executable="java -jar /path/to/google-java-format-VERSION-all-deps.jar"
+Glaive codefmt google_java_executable="java -jar /home/austin/bin/google-java-format-1.7-all-deps.jar"
 
 " Brief help
 " :PluginList       - lists configured plugins
@@ -117,27 +117,42 @@ set hlsearch
 
 au FileType python setl sw=4 sts=4 et
 
-au BufRead,BufNewFile BUILD setfiletype python
+" These are script local in vim-codefmt/plugin/commands.vim.
+" I couldn't figure out how to pass ranges into FormatCode and FormatLines.
+function! s:FormatLinesAndSetRepeat(startline, endline, ...) abort
+  call call('codefmt#FormatLines', [a:startline, a:endline] + a:000)
+  let l:cmd = ":FormatLines " . join(a:000, ' ') . "\<CR>"
+  let l:lines_formatted = a:endline - a:startline + 1
+  silent! call repeat#set(l:cmd, l:lines_formatted)
+endfunction
 
-"augroup filetype
-  "au! BufRead,BufNewFile *.proto setfiletype proto
-"augroup end
+function! s:FormatBufferAndSetRepeat(...) abort
+  call call('codefmt#FormatBuffer', a:000)
+  let l:cmd = ":FormatCode " . join(a:000, ' ') . "\<CR>"
+  silent! call repeat#set(l:cmd)
+endfunction
 
-" TODO(austin): Handle BUILD files better.  They take :FormatCode
-map <C-k> :FormatLines<CR>
-imap <C-k> :FormatLines<CR>i
+" Call FormatCode or FormatLines depending on what the filetype is.
+let g:fullformattypes = ['bzl']
+function s:DoFormat(startline, endline, ...) abort
+  if index(g:fullformattypes, &filetype) == -1
+    call call("s:FormatLinesAndSetRepeat", [a:startline, a:endline] + a:000)
+  else
+    call call("s:FormatBufferAndSetRepeat", a:000)
+  endif
+endfunction
+
+" Create a command so what is printed looks nice when <C-k> is pressed.
+command -nargs=? -range -complete=custom,codefmt#GetSupportedFormatters Format call s:DoFormat(<line1>, <line2>, <f-args>)
+
+map <C-k> :Format<CR>
+imap <C-k> <Esc>:Format<CR>a
+
+augroup filetype
+au! BufRead,BufNewFile *.proto setfiletype proto
+augroup end
 
 color default
 set nu
 
-if has('autocmd')
-  augroup autoformat_settings
-    autocmd!
-
-    autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
-    autocmd FileType javascript AutoFormatBuffer prettier
-    autocmd FileType go AutoFormatBuffer gofmt
-    autocmd FileType java AutoFormatBuffer google-java-format
-    autocmd FileType python AutoFormatBuffer yapf
-  augroup END
-endif
+set noignorecase
