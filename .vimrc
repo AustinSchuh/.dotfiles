@@ -152,6 +152,10 @@ augroup filetype
 au! BufRead,BufNewFile *.proto setfiletype proto
 augroup end
 
+augroup filetype
+au! BufRead,BufNewFile BUILD.*.bazel setfiletype bzl
+augroup end
+
 color default
 set nu
 
