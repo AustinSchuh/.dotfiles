@@ -53,6 +53,7 @@ filetype plugin indent on    " required
 call glaive#Install()
 " Optional: Enable codefmt's default mappings on the <Leader>= prefix.
 Glaive codefmt google_java_executable="java -jar /home/austin/bin/google-java-format-1.7-all-deps.jar"
+Glaive codefmt clang_format_executable=`fnamemodify('~/bin/clang-format-auto', ':p')`
 
 " Brief help
 " :PluginList       - lists configured plugins

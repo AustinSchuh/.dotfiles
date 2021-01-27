@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if REPO="$(git rev-parse --show-toplevel 2>/dev/null)"; then
+  CLANG_FORMAT="${REPO}/bazel-out/../../../external/llvm_toolchain/bin/clang-format"
+  if [[ -e "${CLANG_FORMAT}" ]]; then
+    exec "${CLANG_FORMAT}" "$@"
+  fi  
+fi
+
+exec /usr/bin/clang-format "$@"

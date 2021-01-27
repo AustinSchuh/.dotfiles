@@ -8,4 +8,8 @@
 	status = auto
 	branch = auto
 [core]
-      excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore
+
+[alias]
+	sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
+	lg = log --oneline --graph --decorate
