@@ -4,4 +4,4 @@
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
-export HISTSIZE=100000
+export HISTSIZE=1000000
