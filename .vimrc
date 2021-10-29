@@ -149,12 +149,15 @@ command -nargs=? -range -complete=custom,codefmt#GetSupportedFormatters Format c
 map <C-k> :Format<CR>
 imap <C-k> <Esc>:Format<CR>a
 
-augroup filetype
-au! BufRead,BufNewFile *.proto setfiletype proto
+augroup proto_filetype
+au BufRead,BufNewFile *.proto setfiletype proto
+augroup end
+augroup bzl_filetype
+au BufRead,BufNewFile BUILD.*.bazel setfiletype bzl
 augroup end
 
-augroup filetype
-au! BufRead,BufNewFile BUILD.*.bazel setfiletype bzl
+augroup ts_filetype
+au BufRead,BufNewFile *.ts set filetype=typescript
 augroup end
 
 color default
