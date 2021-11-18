@@ -164,3 +164,14 @@ color default
 set nu
 
 set noignorecase
+
+augroup Binary
+  au!
+  au BufReadPre  *.bfbs.xz let &bin=1
+  au BufReadPost *.bfbs.xz if &bin | %!xxd
+  au BufReadPost *.bfbs.xz set ft=xxd | endif
+  au BufWritePre *.bfbs.xz if &bin | %!xxd -r
+  au BufWritePre *.bfbs.xz endif
+  au BufWritePost *.bfbs.xz if &bin | %!xxd
+  au BufWritePost *.bfbs.xz set nomod | endif
+augroup END
