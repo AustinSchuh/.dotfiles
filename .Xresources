@@ -21,6 +21,7 @@
 !xterm*italicFont: -*-terminus-*-*-*-*-*-*-*-*-*-*-iso10646-*
 !xterm*font: -misc-fixed-medium-r-*-*-18-*-*-*-*-*-*-*
 !xterm*boldFont: -misc-fixed-medium-r-*-*-18-*-*-*-*-*-*-*
+xterm*font:     *-fixed-*-*-*-20-*
  
 ! Very surprising that now neglecting to specify font still renders
 ! perfect misc-fixed font. Oh, it’s so lovely.
