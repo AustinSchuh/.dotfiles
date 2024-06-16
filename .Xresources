@@ -90,7 +90,27 @@ xterm*color7:           #eee8d5
 xterm*color15:          #fdf6e3
 
 xterm*foreground:       #fdf6e3
- 
+
+Zutty.bg:                      #001012
+Zutty.font:                    ter-u24b_unicode
+Zutty.saveLines:               16384
+Zutty.color0:                  #073642
+Zutty.color1:                  #dc322f
+Zutty.color2:                  #859900
+Zutty.color3:                  #b58900
+Zutty.color4:                  #268bd2
+Zutty.color5:                  #d33682
+Zutty.color6:                  #2aa198
+Zutty.color7:                  #eee8d5
+Zutty.color8:                  #002b36
+Zutty.color9:                  #cb4b16
+Zutty.color10:                 #586e75
+Zutty.color11:                 #657b83
+Zutty.color12:                 #839496
+Zutty.color13:                 #6c71c4
+Zutty.color14:                 #93a1a1
+Zutty.color15:                 #fdf6e3
+Zutty.fg:                      #fdf6e3
  
 !!! Themes overrides
  
