@@ -58,7 +58,7 @@ hi Error          term=reverse ctermfg=15 ctermbg=9 guifg=White guibg=Red
 hi Comment        term=bold ctermfg=4 guifg=Blue
 hi Constant       term=underline ctermfg=1 guifg=Magenta
 hi Special        term=bold ctermfg=5 guifg=#6a5acd
-hi Identifier     term=underline ctermfg=6 guifg=DarkCyan
+hi Identifier     cterm=nocombine ctermfg=6 guifg=DarkCyan
 hi Statement      term=bold ctermfg=130 gui=bold guifg=Brown
 hi PreProc        term=underline ctermfg=5 guifg=#6a0dad
 hi Type           term=underline ctermfg=2 gui=bold guifg=SeaGreen
@@ -71,6 +71,7 @@ hi link Number         Constant
 hi link Boolean        Constant
 hi link Float          Number
 hi link Function       Identifier
+hi link pythonFunction Identifier
 hi link Conditional    Statement
 hi link Repeat         Statement
 hi link Label          Statement
