@@ -163,3 +163,6 @@ augroup Binary
   au BufWritePost *.bfbs.xz if &bin | %!xxd
   au BufWritePost *.bfbs.xz set nomod | endif
 augroup END
+
+" Ask instead of automatically loading new file contents
+set noautoread
