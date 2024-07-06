@@ -1,6 +1,7 @@
 [user]
 	name = Austin Schuh
 	email = austin.linux@gmail.com
+	signingkey = 415630D3CB0E9D66
 [merge]
 	tool = vimdiff
 [color]
@@ -18,3 +19,7 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[init]
+  	defaultBranch = main
+[gpg]
+  	program = /home/austin/bin/gpg2-loopback
