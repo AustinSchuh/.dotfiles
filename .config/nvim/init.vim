@@ -166,3 +166,8 @@ augroup END
 
 " Ask instead of automatically loading new file contents
 set noautoread
+
+set mouse=
+
+set wildmenu
+set wildmode=longest:list
