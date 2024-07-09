@@ -3,7 +3,7 @@
 	email = austin.linux@gmail.com
 	signingkey = 415630D3CB0E9D66
 [merge]
-	tool = vimdiff
+	tool = nvimdiff
 [color]
 	diff = auto
 	status = auto
