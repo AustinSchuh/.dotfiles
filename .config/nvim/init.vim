@@ -172,7 +172,8 @@ set mouse=
 set wildmenu
 set wildmode=longest:list
 
-# Check if the file has changed ever time we start typing, or focus on the window.
+" Check if the file has changed ever time we start typing, or focus on the window.
 au CursorHold * checktime
 au FocusGained * checktime
 au WinEnter * checktime
+au VimResume * checktime
