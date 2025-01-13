@@ -23,3 +23,5 @@
   	defaultBranch = main
 [gpg]
   	program = /home/austin/bin/gpg2-loopback
+[credential]
+	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
