@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -e /usr/bin/nvim ]; then
+  exec /usr/bin/nvim "$@"
+fi
+
+if [ -e /usr/bin/vim ]; then
+  exec /usr/bin/vim "$@"
+fi
+
+exec /usr/bin/vi "$@"
