@@ -1,0 +1,5 @@
+build --sandbox_base=/dev/shm
+build --repository_cache=~/.cache/bazel/_bazel_austin/repository_cache
+build --experimental_repository_cache_hardlinks
+sync --repository_cache=~/.cache/bazel/_bazel_austin/repository_cache
+startup --max_idle_secs=18000
